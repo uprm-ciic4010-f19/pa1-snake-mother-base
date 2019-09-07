@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -17,7 +19,8 @@ public class Player {
 
     public int xCoord;
     public int yCoord;
-
+    public static double currScore = 0;
+    
     public int moveCounter;
 
     public String direction;//is your first name one?
@@ -48,7 +51,13 @@ public class Player {
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
             direction="Right";
         }
-
+         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
+        	 Eat();
+        	 handler.getWorld().appleOnBoard=true;
+         }
+         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+        	 State.setState(handler.getGame().pauseState);
+         }
     }
 
     public void checkCollisionAndMove(){
@@ -90,6 +99,7 @@ public class Player {
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
+            currScore = Math.sqrt(2 * currScore + 1);
         }
 
         if(!handler.getWorld().body.isEmpty()) {
@@ -102,21 +112,75 @@ public class Player {
 
     public void render(Graphics g,Boolean[][] playeLocation){
         Random r = new Random();
+        int colorCode = 0;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
-            for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.WHITE);
+        	if (colorCode == 0) {
+        		g.setColor(Color.green);
+        		colorCode = colorCode + 1 ;
+        	} else if (colorCode == 1) {
+        		g.setColor(Color.blue);
+        		colorCode = colorCode + 1 ;
+        	} else if (colorCode == 2) {
+             	g.setColor(Color.cyan);
+             	colorCode = colorCode + 1 ;
+        	} else if (colorCode == 3) {
+                g.setColor(Color.pink);
+                colorCode = colorCode + 1 ;
+            } else if (colorCode == 4) {
+                g.setColor(Color.magenta);
+                colorCode = colorCode + 1 ;
+            } else if (colorCode == 5) {
+                g.setColor(Color.red);
+                colorCode = colorCode + 1 ;
+            } else if (colorCode == 6) {
+                g.setColor(Color.orange);
+                colorCode = colorCode + 1 ;
+            } else if (colorCode == 7) {
+                g.setColor(Color.yellow);
+                colorCode = colorCode - 7 ;
+            }
+        	for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+        		if (colorCode == 0) {
+            		g.setColor(Color.green);
+            		colorCode = colorCode + 1 ;
+            	} else if (colorCode == 1) {
+            		g.setColor(Color.blue);
+            		colorCode = colorCode + 1 ;
+            	} else if (colorCode == 2) {
+                 	g.setColor(Color.cyan);
+                 	colorCode = colorCode + 1 ;
+            	} else if (colorCode == 3) {
+                    g.setColor(Color.pink);
+                    colorCode = colorCode + 1 ;
+                } else if (colorCode == 4) {
+                    g.setColor(Color.magenta);
+                    colorCode = colorCode + 1 ;
+                } else if (colorCode == 5) {
+                    g.setColor(Color.red);
+                    colorCode = colorCode + 1 ;
+                } else if (colorCode == 6) {
+                    g.setColor(Color.orange);
+                    colorCode = colorCode + 1 ;
+                } else if (colorCode == 7) {
+                    g.setColor(Color.yellow);
+                    colorCode = colorCode - 7 ;
+                }
+        		//g.setColor(Color.green);
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
+                    
+           
+        		   
                 }
 
             }
         }
 
-
+        g.drawString(currScore+"", 1, 10);
     }
 
     public void Eat(){
@@ -225,7 +289,13 @@ public class Player {
         }
         handler.getWorld().body.addLast(tail);
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
-    }
+        
+        
+
+        }
+        
+    
+    
 
     public void kill(){
         lenght = 0;
