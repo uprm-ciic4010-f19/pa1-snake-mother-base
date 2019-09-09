@@ -117,68 +117,31 @@ public class Player {
 
     public void render(Graphics g,Boolean[][] playeLocation){
         Random r = new Random();
+        Color [] colors = {Color.green, Color.blue, Color.cyan, Color.pink, Color.magenta, Color.red, Color.orange, Color.yellow};
         int colorCode = 0;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
-        	if (colorCode == 0) {
-        		g.setColor(Color.green);
-        		colorCode = colorCode + 1 ;
-        	} else if (colorCode == 1) {
-        		g.setColor(Color.blue);
-        		colorCode = colorCode + 1 ;
-        	} else if (colorCode == 2) {
-             	g.setColor(Color.cyan);
-             	colorCode = colorCode + 1 ;
-        	} else if (colorCode == 3) {
-                g.setColor(Color.pink);
-                colorCode = colorCode + 1 ;
-            } else if (colorCode == 4) {
-                g.setColor(Color.magenta);
-                colorCode = colorCode + 1 ;
-            } else if (colorCode == 5) {
-                g.setColor(Color.red);
-                colorCode = colorCode + 1 ;
-            } else if (colorCode == 6) {
-                g.setColor(Color.orange);
-                colorCode = colorCode + 1 ;
-            } else if (colorCode == 7) {
-                g.setColor(Color.yellow);
-                colorCode = colorCode - 7 ;
-            }
+        	if (colorCode < 7) {
+        		g.setColor(colors[colorCode]);
+        		colorCode++;
+        	} else if (colorCode == 7) {
+        		g.setColor(colors[colorCode]);
+        		colorCode = colorCode - 7;
+        	}
         	for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-        		if (colorCode == 0) {
-            		g.setColor(Color.green);
-            		colorCode = colorCode + 1 ;
-            	} else if (colorCode == 1) {
-            		g.setColor(Color.blue);
-            		colorCode = colorCode + 1 ;
-            	} else if (colorCode == 2) {
-                 	g.setColor(Color.cyan);
-                 	colorCode = colorCode + 1 ;
-            	} else if (colorCode == 3) {
-                    g.setColor(Color.pink);
-                    colorCode = colorCode + 1 ;
-                } else if (colorCode == 4) {
-                    g.setColor(Color.magenta);
-                    colorCode = colorCode + 1 ;
-                } else if (colorCode == 5) {
-                    g.setColor(Color.red);
-                    colorCode = colorCode + 1 ;
-                } else if (colorCode == 6) {
-                    g.setColor(Color.orange);
-                    colorCode = colorCode + 1 ;
-                } else if (colorCode == 7) {
-                    g.setColor(Color.yellow);
-                    colorCode = colorCode - 7 ;
+        		if (colorCode < 7) {
+            		g.setColor(colors[colorCode]);
+            		colorCode++;
+            	} else if (colorCode == 7) {
+            		g.setColor(colors[colorCode]);
+            		colorCode = colorCode - 7;
                 }
-        		//g.setColor(Color.green);
+        		//Phase 1: Multicolored snake
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
                             (j*handler.getWorld().GridPixelsize),
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
-                    
-           
         		   
                 }
 
