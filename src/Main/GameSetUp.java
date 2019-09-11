@@ -1,6 +1,7 @@
 package Main;
 
 import Display.DisplayScreen;
+import Game.GameStates.GameOverState;
 import Game.GameStates.GameState;
 import Game.GameStates.MenuState;
 import Game.GameStates.PauseState;
@@ -45,6 +46,7 @@ public class GameSetUp implements Runnable {
     public State gameState;
     public State menuState;
     public State pauseState;
+    public State gameoverState;
 
     //Res.music
     private InputStream audioFile;
@@ -81,12 +83,13 @@ public class GameSetUp implements Runnable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
+        gameoverState = new GameOverState(handler);
 
         State.setState(menuState);
 
         try {
 
-            audioFile = getClass().getResourceAsStream("/music/nature.wav");
+            audioFile = getClass().getResourceAsStream("/music/Metal Gear Solid Main Theme.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
             format = audioStream.getFormat();
             info = new DataLine.Info(Clip.class, format);
