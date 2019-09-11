@@ -5,10 +5,8 @@ import Main.Handler;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
-import java.util.Random;
 
 import Game.GameStates.State;
-
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -114,24 +112,30 @@ public class Player {
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
-           // new DecimalFormat(#.00).format(currScore);
             currScore = Math.sqrt(2 * currScore + 1);
-            DecimalFormat numberFormat = new DecimalFormat("#.00");
+            DecimalFormat numberFormat = new DecimalFormat("#.000000");
             Score=numberFormat.format(currScore);
         }
 
         if(!handler.getWorld().body.isEmpty()) {
             handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
             handler.getWorld().body.removeLast();
-            handler.getWorld().body.addFirst(new Tail(x, y,handler));
+            handler.getWorld().body.addFirst(new Tail(x, y,handler));}
+            
+        for(int i = 0; i < handler.getWorld().body.size(); i++) {
+        	if(xCoord == handler.getWorld().body.get(i).x && yCoord == handler.getWorld().body.get(i).y) {
+        		State.setState(handler.getGame().gameoverState);
+        		
+        	kill();
+        	}
         }
+    }
         
-        
-        }
-
     
+        
 
-    public void render(Graphics g,Boolean[][] playeLocation){
+  
+	public void render(Graphics g,Boolean[][] playeLocation){
         Color [] colors = {Color.green, Color.blue, Color.cyan, Color.pink, Color.magenta, Color.red, Color.orange, Color.yellow};
         int colorCode = 0;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
@@ -272,10 +276,10 @@ public class Player {
         }
         handler.getWorld().body.addLast(tail);
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
-        
-        
 
         }
+        
+
         
     
     
