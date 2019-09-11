@@ -89,7 +89,7 @@ public class GameSetUp implements Runnable {
 
         try {
 
-            audioFile = getClass().getResourceAsStream("/music/Metal Gear Solid Main Theme.wav");
+            audioFile = getClass().getResourceAsStream("/music/Metal Gear Solid Soundtrack Encounter.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
             format = audioStream.getFormat();
             info = new DataLine.Info(Clip.class, format);
