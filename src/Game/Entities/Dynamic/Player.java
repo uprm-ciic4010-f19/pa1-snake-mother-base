@@ -70,7 +70,9 @@ public class Player {
          if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
         	 State.setState(handler.getGame().gameoverState);
          }
-    }
+
+         }
+
 
     public void checkCollisionAndMove(){
         handler.getWorld().playerLocation[xCoord][yCoord]=false;
@@ -115,6 +117,7 @@ public class Player {
             currScore = Math.sqrt(2 * currScore + 1);
             DecimalFormat numberFormat = new DecimalFormat("#.000000");
             Score=numberFormat.format(currScore);
+            pace=pace-1;
         }
 
         if(!handler.getWorld().body.isEmpty()) {
@@ -276,6 +279,8 @@ public class Player {
         }
         handler.getWorld().body.addLast(tail);
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
+        
+       
 
         }
         
@@ -302,5 +307,6 @@ public class Player {
 
     public void setJustAte(boolean justAte) {
         this.justAte = justAte;
+        
     }
 }
