@@ -50,7 +50,7 @@ public class Player {
         lenght= 1;
 
     }
-    double pace = 5;
+    int pace = 5;
     public void tick(){
         moveCounter++;
 
@@ -71,10 +71,10 @@ public class Player {
 				direction = "Right";
         }
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
-			pace=pace+0.5;
+			pace+=0.5;
 		}
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)) {
-			pace=pace-0.5;
+			pace-=0.5;
 		}
          if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
         	 Eat();
@@ -149,10 +149,11 @@ public class Player {
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat();
-            currScore = currScore + Math.sqrt(2 * currScore + 1);
+            pace -= 0.5;
+            currScore += Math.sqrt(2 * currScore + 1);
             DecimalFormat numberFormat = new DecimalFormat("#.00");
             Score=numberFormat.format(currScore);
-            pace=pace-0.5;
+            
         }
 
         if(!handler.getWorld().body.isEmpty()) {
