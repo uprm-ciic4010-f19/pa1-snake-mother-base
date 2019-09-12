@@ -8,6 +8,19 @@ import UI.UIManager;
 
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+
+
 
 /**
  * Created by AlexVR on 7/1/2018.
@@ -16,6 +29,9 @@ public class GameOverState extends State {
 
     private int count = 0;
     private UIManager uiManager;
+    
+    
+    
 
     public GameOverState(Handler handler) {
         super(handler);
@@ -40,10 +56,14 @@ public class GameOverState extends State {
 //       }));
 
 
-
-
-
+        
+        
+        
     }
+
+
+
+    
 
     @Override
     public void tick() {
@@ -57,6 +77,10 @@ public class GameOverState extends State {
             count=0;
 
             State.setState(handler.getGame().gameState);
+            
+            
+            
+            
         }
 
 
@@ -64,9 +88,10 @@ public class GameOverState extends State {
 
     @Override
     public void render(Graphics g) {
+    	
         g.drawImage(Images.GameOver,0,0,800,800,null);
         uiManager.Render(g);
-
+        
     }
 
 	//@Override

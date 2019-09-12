@@ -4,7 +4,17 @@ import Main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import Game.GameStates.State;
 /**
@@ -21,6 +31,12 @@ public class Player {
     public static double currScore = 0.0;
     public String Score;
     public int moveCounter;
+    
+    private InputStream GameOverMusic;
+    private AudioInputStream audioStream;
+    private AudioFormat format;
+    private DataLine.Info info;
+    private Clip audioClip;
    
     public String direction;//is your first name one?
 
@@ -69,6 +85,25 @@ public class Player {
          }
          if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
         	 State.setState(handler.getGame().gameoverState);
+        	 
+        	 try {
+             	
+             	GameOverMusic = getClass().getResourceAsStream("/music/Game Over - Metal Gear Solid.wav");
+                 audioStream = AudioSystem.getAudioInputStream(GameOverMusic);
+                 format = audioStream.getFormat();
+                 info = new DataLine.Info(Clip.class, format);
+                 audioClip = (Clip) AudioSystem.getLine(info);
+                 audioClip.open(audioStream);
+                 audioClip.loop(0);
+
+
+             } catch (UnsupportedAudioFileException e) {
+                 e.printStackTrace();
+             } catch (IOException e) {
+                 e.printStackTrace();
+             } catch (LineUnavailableException e) {
+                 e.printStackTrace();
+             }
          }
 
          }
@@ -128,6 +163,25 @@ public class Player {
         for(int i = 0; i < handler.getWorld().body.size(); i++) {
         	if(xCoord == handler.getWorld().body.get(i).x && yCoord == handler.getWorld().body.get(i).y) {
         		State.setState(handler.getGame().gameoverState);
+        		
+        		try {
+                 	
+                 	GameOverMusic = getClass().getResourceAsStream("/music/Game Over - Metal Gear Solid.wav");
+                     audioStream = AudioSystem.getAudioInputStream(GameOverMusic);
+                     format = audioStream.getFormat();
+                     info = new DataLine.Info(Clip.class, format);
+                     audioClip = (Clip) AudioSystem.getLine(info);
+                     audioClip.open(audioStream);
+                     audioClip.loop(0);
+
+
+                 } catch (UnsupportedAudioFileException e) {
+                     e.printStackTrace();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 } catch (LineUnavailableException e) {
+                     e.printStackTrace();
+                 }
         		
         	kill();
         	}
