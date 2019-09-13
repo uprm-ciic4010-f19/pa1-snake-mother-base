@@ -18,18 +18,26 @@ public class Images {
     public static BufferedImage[] BTitle;
     public static BufferedImage[] Options;
     public static ImageIcon icon;
-
+    public static BufferedImage GameOver;
+    public static BufferedImage[] Continue;
+    public static BufferedImage[] Exit;		
+    
     public Images() {
 
         butstart = new BufferedImage[3];
         Resume = new BufferedImage[2];
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
+        Continue = new BufferedImage[2];
+        Exit = new BufferedImage[2];
 
         try {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Title.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Buttons/Pause.png"));
+            GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/Game Over Screen.jpg"));
+            Continue[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/Continue Button.jpg"));
+            Exit[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/Exit Button.jpg"));
             Resume[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/Resume.png"));
             Resume[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/ResumeP.png"));
             BTitle[0] = ImageIO.read(getClass().getResourceAsStream("/Buttons/BTitle.png"));

@@ -29,7 +29,8 @@ public class DisplayScreen {
 
     private void createDisplay(){
         frame = new JFrame(title);
-        frame.setSize(width, height);
+        //Phase 1: Set Grid Size to 60X60
+        frame.setSize(60, 60);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
@@ -41,14 +42,16 @@ public class DisplayScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        //Phase 1: Set Background Color to Purple
+        final Color purple = new Color(102,0,153);
+        
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-        canvas.setBackground(Color.black);
-
+        canvas.setBackground(purple);
+        
         frame.add(canvas);
         frame.pack();
     }
